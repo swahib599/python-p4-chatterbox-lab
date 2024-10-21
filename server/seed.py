@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-
+# seed.py
 from random import choice as rc
-
 from faker import Faker
-
 from app import app
 from models import db, Message
 
@@ -14,7 +11,7 @@ if "Duane" not in usernames:
     usernames.append("Duane")
 
 def make_messages():
-
+    # Clear existing messages
     Message.query.delete()
     
     messages = []
@@ -27,7 +24,8 @@ def make_messages():
         messages.append(message)
 
     db.session.add_all(messages)
-    db.session.commit()        
+    db.session.commit()  
+    print(f"Inserted {len(messages)} messages into the database.")
 
 if __name__ == '__main__':
     with app.app_context():
